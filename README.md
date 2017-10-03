@@ -6,7 +6,7 @@ This little script was born out of a desire to get rid of DynDNS and similar ser
 This script requires a fully configured installation [AWS cli](http://aws.amazon.com/cli/) which is used to do the update.
 
 What it does:
-1. Use curl to get the local IP address from a router status page
+1. Use curl to get the local IP address using an external service
 2. Check whether the internally reported IP matches the one known to a public DNS server
 3. If it doesn't match, create an update record to update a hosted zone file on AWS Route 53
 

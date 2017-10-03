@@ -1,12 +1,10 @@
 #!/bin/bash
 # Script retrieves the current IP Address from a standard German Telecom Router and
 # uses this to update an Amazon AWS Route 53 zone
-CURL="/usr/bin/curl -ks"
+CURL="$(command -v curl) -ks" || CURL="/usr/bin/curl -ks"
 TMPFILE=/tmp/`date +%Y%m%d_%H%M%S`.awsdns
-AWSBIN=/usr/local/bin/aws
+AWSBIN=$(command -v aws) || AWSBIN=/usr/local/bin/aws
 
-#URL to the router page containing the current IP
-URL="https://<YOUR ROUTER IP HERE>/top_status.stm"
 # Amazon AWS hosted zone ID
 ZONEID=<YOUR ZONEID HERE>
 # A record for your dyndns name
@@ -15,8 +13,8 @@ DYNHOST=<YOUR HOSTNAME HERE>
 # a public name server to check what the currently registered IP is
 DNS=8.8.8.8
 
-# GET IP FROM ROUTER
-IP=$(${CURL} $URL | grep "var wan_ip" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}')
+# GET CURRENT IP
+IP=`$CURL ifconfig.co`
 
 # FIND CURRENTLY REGISTERED IP
 REMOTEIP=`dig +short $DYNHOST @$DNS`
