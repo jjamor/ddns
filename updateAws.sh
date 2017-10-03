@@ -10,6 +10,14 @@ ZONEID=<YOUR ZONEID HERE>
 # A record for your dyndns name
 DYNHOST=<YOUR HOSTNAME HERE>
 
+# Test: Can we use awscli? (i.e is it configured?)
+aws ec2 describe-regions --region us-east-1 >/dev/null 2>&1
+if [ $? -ne 0 ]
+then
+  echo "AWS CLI not available/configured or cannot connect!"
+  exit 1
+fi
+
 # a public name server to check what the currently registered IP is
 DNS=8.8.8.8
 
