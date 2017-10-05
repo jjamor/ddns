@@ -22,7 +22,8 @@ fi
 DNS=8.8.8.8
 
 # GET CURRENT IP
-IP=`$CURL ifconfig.co`
+# IP=`$CURL ifconfig.co`
+IP=`$CURL checkip.amazonaws.com`
 
 # FIND CURRENTLY REGISTERED IP
 REMOTEIP=`dig +short $DYNHOST @$DNS`
